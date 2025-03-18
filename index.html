@@ -196,9 +196,16 @@
     });
 
     window.addEventListener("popstate", function () {
-      sessionStorage.removeItem("smartlink_visited");
-      window.location.href = "index.html";
+      if (sessionStorage.getItem("smartlink_visited")) {
+        // Khi người dùng bấm "Quay lại", hiển thị return-screen thay vì loading-screen
+        loadingScreen.style.display = "none";
+        returnScreen.style.display = "block";
+      } else {
+        sessionStorage.removeItem("smartlink_visited");
+        window.location.href = "index.html";
+      }
     });
+
   </script>
 </body>
 
