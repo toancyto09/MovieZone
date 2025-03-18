@@ -146,7 +146,7 @@
       <div class="icon-wrapper">
         <i class="fas fa-check-circle check-icon" style="display: block;"></i>
       </div>
-      <p class="loading-text">You have completed the test.</p>
+      <p class="loading-text">You have completed the check.</p>
       <button class="btn" id="try-again-btn">Try Again</button>
       <button class="btn btn-secondary" id="movie-site-btn">Go to Movie Site</button>
     </div>
@@ -198,6 +198,7 @@
     window.addEventListener("popstate", function () {
       if (sessionStorage.getItem("smartlink_visited")) {
         // Khi người dùng bấm "Quay lại", hiển thị return-screen thay vì loading-screen
+        location.reload();
         loadingScreen.style.display = "none";
         returnScreen.style.display = "block";
       } else {
