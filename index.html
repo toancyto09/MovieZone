@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checking Connection...</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f7f7f7;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      max-width: 450px;
+      width: 100%;
+    }
+
+    .logo {
+      width: 180px;
+      margin-bottom: 15px;
+    }
+
+    .icon-wrapper {
+      font-size: 35px;
+      margin: 10px auto;
+    }
+
+    .loading-icon {
+      color: #f48120;
+      animation: spin 2s linear infinite;
+    }
+
+    .check-icon {
+      color: #28a745;
+      display: none;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-text {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #f48120;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #d56f1b;
+    }
+
+    .btn-secondary {
+      background: #444;
+    }
+
+    .btn-secondary:hover {
+      background: #222;
+    }
+
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .small-text {
+      font-size: 14px;
+      margin-top: 10px;
+      color: #666;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+
+      .logo {
+        width: 150px;
+      }
+
+      .icon-wrapper {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Cloudflare_Logo.svg/2560px-Cloudflare_Logo.svg.png"
+      alt="Cloudflare Logo" class="logo">
+
+    <div class="icon-wrapper">
+      <i class="fas fa-circle-notch fa-spin loading-icon" id="loading-icon"></i>
+      <i class="fas fa-check-circle check-icon" id="check-icon"></i>
+    </div>
+
+    <div id="loading-screen">
+      <p class="loading-text">Checking your connection, please wait...</p>
+      <p class="small-text">If the page does not redirect automatically, click below.</p>
+      <button class="btn" id="redirect-btn" disabled>Continue</button>
+    </div>
+
+    <div id="return-screen" style="display: none;">
+      <div class="icon-wrapper">
+        <i class="fas fa-check-circle check-icon" style="display: block;"></i>
+      </div>
+      <p class="loading-text">You have completed the test.</p>
+      <button class="btn" id="try-again-btn">Try Again</button>
+      <button class="btn btn-secondary" id="movie-site-btn">Go to Movie Site</button>
+    </div>
+  </div>
+
+  <script>
+    const smartLink = "https://goathaga.top/4/9078475";
+    const movieSite = "https://moviehot24h.top";
+    const redirectBtn = document.getElementById("redirect-btn");
+    const tryAgainBtn = document.getElementById("try-again-btn");
+    const movieSiteBtn = document.getElementById("movie-site-btn");
+    const loadingScreen = document.getElementById("loading-screen");
+    const returnScreen = document.getElementById("return-screen");
+    const loadingIcon = document.getElementById("loading-icon");
+    const checkIcon = document.getElementById("check-icon");
+
+    if (sessionStorage.getItem("smartlink_visited")) {
+      loadingScreen.style.display = "none";
+      returnScreen.style.display = "block";
+
+      // Ẩn icon loading khi trở lại
+      document.querySelector(".loading-icon").style.display = "none";
+      if (!returnScreen.querySelector(".check-icon")) {
+        document.querySelector(".check-icon").style.display = "block";
+      }
+
+    } else {
+      setTimeout(() => {
+        document.querySelector(".loading-icon").style.display = "none"; // Ẩn icon loading
+        document.querySelector(".check-icon").style.display = "block";  // Hiện icon check
+        redirectBtn.disabled = false;
+      }, 3000);
+
+    }
+
+    redirectBtn.addEventListener("click", () => {
+      sessionStorage.setItem("smartlink_visited", "true");
+      window.location.href = smartLink;
+    });
+
+    tryAgainBtn.addEventListener("click", () => {
+      window.location.href = smartLink;
+    });
+
+    movieSiteBtn.addEventListener("click", () => {
+      window.location.href = movieSite;
+    });
+
+    window.addEventListener("popstate", function () {
+      sessionStorage.removeItem("smartlink_visited");
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+
+</html>
