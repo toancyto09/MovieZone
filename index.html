@@ -122,23 +122,78 @@
         font-size: 30px;
       }
     }
+
+    .verification-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      margin: 20px 0;
+      background: #fff;
+    }
+
+    .verification-logo {
+      width: 76px;
+      margin-right: 9px;
+      margin-left: 14px;
+      margin-bottom: 15px;
+    }
+
+    .loading-icon {
+      font-size: 30px;
+      color: #f48120;
+      animation: spin 2s linear infinite;
+    }
+
+    .check-icon {
+      font-size: 30px;
+      color: #28a745;
+      display: none;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .verification-box p {
+      margin-left: 12px;
+    }
+
+    h2 {
+      font-size: 16px;
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <img
+    <!-- <img
       src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Cloudflare_Logo.svg/2560px-Cloudflare_Logo.svg.png"
       alt="Cloudflare Logo" class="logo">
 
     <div class="icon-wrapper">
       <i class="fas fa-circle-notch fa-spin loading-icon" id="loading-icon"></i>
       <i class="fas fa-check-circle check-icon" id="check-icon"></i>
-    </div>
+    </div> -->
 
     <div id="loading-screen">
-      <p class="loading-text">Checking your connection, please wait...</p>
-      <p class="small-text">If the page does not redirect automatically, click below.</p>
+      <h2>Checking if the site connection is secure</h2>
+      <div class="verification-box">
+        <i class="fas fa-circle-notch fa-spin loading-icon" id="loading-icon"></i>
+        <i class="fas fa-check-circle check-icon" id="check-icon"></i>
+        <p>Verify you are human</p>
+        <img
+          src="data:image/png;base64,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"
+          alt="Logo" class="verification-logo">
+      </div>
       <button class="btn" id="redirect-btn" disabled>Continue</button>
     </div>
 
