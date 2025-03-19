@@ -223,20 +223,22 @@
     const loadingIcon = document.getElementById("loading-icon");
     const checkIcon = document.getElementById("check-icon");
 
-    if (sessionStorage.getItem("smartlink_visited")) {
-      loadingScreen.style.display = "none";
-      returnScreen.style.display = "block";
-      document.querySelector(".loading-icon").style.display = "none";
-      if (!returnScreen.querySelector(".check-icon")) {
-        document.querySelector(".check-icon").style.display = "block";
-      }
-    } else {
-      setTimeout(() => {
+    document.addEventListener("DOMContentLoaded", function () {
+      if (sessionStorage.getItem("smartlink_visited")) {
+        loadingScreen.style.display = "none";
+        returnScreen.style.display = "block";
         document.querySelector(".loading-icon").style.display = "none";
-        document.querySelector(".check-icon").style.display = "block";
-        redirectBtn.disabled = false;
-      }, 3000);
-    }
+        if (!returnScreen.querySelector(".check-icon")) {
+          document.querySelector(".check-icon").style.display = "block";
+        }
+      } else {
+        setTimeout(() => {
+          document.querySelector(".loading-icon").style.display = "none";
+          document.querySelector(".check-icon").style.display = "block";
+          redirectBtn.disabled = false;
+        }, 3000);
+      }
+    });
 
     redirectBtn.addEventListener("click", () => {
       sessionStorage.setItem("smartlink_visited", "true");
@@ -252,13 +254,6 @@
     movieSiteBtn.addEventListener("click", () => {
       window.location.href = movieSite;
     });
-
-    document.addEventListener("DOMContentLoaded", function () {
-      if (sessionStorage.getItem("directLinkVisited") === "true") {
-        location.reload();
-      }
-    });
-
   </script>
 </body>
 
