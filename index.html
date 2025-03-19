@@ -153,7 +153,12 @@
   </div>
 
   <script>
-    const smartLink = "https://goathaga.top/4/9078475";
+    const smartLinks = [
+      "https://ptukseew.top/4/9078489",
+      "https://ptukseew.top/4/9078475",
+      "https://ptukseew.top/4/9078507"
+    ];
+
     const movieSite = "https://moviehot24h.top";
     const redirectBtn = document.getElementById("redirect-btn");
     const tryAgainBtn = document.getElementById("try-again-btn");
@@ -166,29 +171,27 @@
     if (sessionStorage.getItem("smartlink_visited")) {
       loadingScreen.style.display = "none";
       returnScreen.style.display = "block";
-
-      // Ẩn icon loading khi trở lại
       document.querySelector(".loading-icon").style.display = "none";
       if (!returnScreen.querySelector(".check-icon")) {
         document.querySelector(".check-icon").style.display = "block";
       }
-
     } else {
       setTimeout(() => {
-        document.querySelector(".loading-icon").style.display = "none"; // Ẩn icon loading
-        document.querySelector(".check-icon").style.display = "block";  // Hiện icon check
+        document.querySelector(".loading-icon").style.display = "none";
+        document.querySelector(".check-icon").style.display = "block";
         redirectBtn.disabled = false;
       }, 3000);
-
     }
 
     redirectBtn.addEventListener("click", () => {
       sessionStorage.setItem("smartlink_visited", "true");
-      window.location.href = smartLink;
+      const randomLink = smartLinks[Math.floor(Math.random() * smartLinks.length)];
+      window.location.href = randomLink;
     });
 
     tryAgainBtn.addEventListener("click", () => {
-      window.location.href = smartLink;
+      const randomLink = smartLinks[Math.floor(Math.random() * smartLinks.length)];
+      window.location.href = randomLink;
     });
 
     movieSiteBtn.addEventListener("click", () => {
@@ -196,15 +199,7 @@
     });
 
     window.addEventListener("popstate", function () {
-      if (sessionStorage.getItem("smartlink_visited")) {
-        // Khi người dùng bấm "Quay lại", hiển thị return-screen thay vì loading-screen
-        location.reload();
-        loadingScreen.style.display = "none";
-        returnScreen.style.display = "block";
-      } else {
-        sessionStorage.removeItem("smartlink_visited");
-        window.location.href = "index.html";
-      }
+      location.reload(); // Reload lại trang khi bấm quay lại
     });
 
   </script>
