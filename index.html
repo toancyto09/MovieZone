@@ -253,8 +253,10 @@
       window.location.href = movieSite;
     });
 
-    window.addEventListener("popstate", function () {
-      location.reload(); // Reload lại trang khi bấm quay lại
+    document.addEventListener("DOMContentLoaded", function () {
+      if (sessionStorage.getItem("directLinkVisited") === "true") {
+        location.reload();
+      }
     });
 
   </script>
